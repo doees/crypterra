@@ -1,86 +1,86 @@
 export const campaignStages = [
   [
     {
-      "title": "Silent orbit",
+      "title": "Eclipse log",
       "algorithm": "Vigen\u00e8re",
-      "brief": "The relay uses a repeating alphabetic key. Its operators left a five-line log. Read what leads; decode the entire transmission.",
-      "evidence": "Outbound carrier stable.\nRelay is unattended.\nBeacon lost at dusk.\nInbound traffic repeats.\nTracking remains active.",
+      "brief": "Read the seven-line relay log to discover a repeating keyword. The lead characters carry the signal. Decrypt the complete transmission.",
+      "evidence": "Evening carrier stable.\nControl room empty.\nLunar beacon fading.\nInbound packets repeat.\nPolar relay active.\nSatellite descending.\nEcho acknowledged.",
       "hints": [
-        "The first character of each log line matters.",
-        "Read the initials top to bottom; use the resulting word as a Vigen\u00e8re keyword."
+        "Use the first letter of each log line, in its original order.",
+        "That seven-letter word is the Vigen\u00e8re keyword. Decode the transmission to recover the next key."
       ],
-      "prompt": "Submit the full decoded sentence, including the relay-key announcement.",
-      "code": "FVMIRYVZQLJVDBHF",
-      "digest": "6b6def52c10a69c6fea58a9d55d8b7b8c6b351f7003ecacb638a33773dbbb4bd"
+      "prompt": "Submit the entire decoded relay-key announcement.",
+      "code": "VGWINCICKDTPFXITY",
+      "digest": "f5d22098b0f9c352ce9217fda9fc215ac0d5496fd4a2b545433d77b64f1ac5e4"
     },
     {
-      "title": "The shuffled rendezvous",
-      "algorithm": "Columnar",
-      "brief": "Use the relay key recovered in stage 1. The sender filled a rectangle left to right, then transmitted columns in alphabetical keyword order.",
-      "evidence": "ROW-WISE FILL / ALPHABETICAL COLUMN READOUT\nUnused cells are padded with X.",
+      "title": "The long rendezvous",
+      "algorithm": "Vigen\u00e8re",
+      "brief": "Use the keyword recovered in layer 1. This longer Vigen\u00e8re message has no spaces. Keep the full rendezvous instruction intact.",
+      "evidence": "KEY SOURCE: PREVIOUS DECODED TRANSMISSION\nALIGNMENT: FIRST LETTER / A=0 \u2026 Z=25",
       "hints": [
-        "The keyword is the final word of your previous decoded transmission.",
-        "Give each sorted keyword letter one equal-length ciphertext column. Restore the original column order, then read rows."
+        "The recovered keyword follows RELAY KEY IS in the previous message.",
+        "Repeat the recovered keyword across the entire ciphertext. Decode all letters; no characters are padding."
       ],
-      "prompt": "Submit the rendezvous instruction. Remove trailing X padding.",
-      "code": "NUREEOOTEAHXZTGXDSTXRVNA",
-      "digest": "2ee1da0402404a2ec03300ea8724e5ba01ae9065fc552f5b80cef8c72a6ab208"
+      "prompt": "Submit the complete rendezvous instruction.",
+      "code": "XERMXYRNOHKMVELTGAIEBCTUHFJRCVNMSILLFGXVDVONVZLK",
+      "digest": "0e409e25ea3874069e9af930ddedfbc5700df31f20c9fce9d500b69add9e2174"
     }
   ],
   [
     {
-      "title": "The unsigned packet",
-      "algorithm": "XOR hex",
-      "brief": "The packet is hexadecimal, encrypted with a repeating ASCII key. Four diagnostic lines survived. The key keeps its uppercase form.",
-      "evidence": "Network appears empty.\nObservers report interference.\nVectors remain unstable.\nAccess is intermittent.",
+      "title": "Known signal",
+      "algorithm": "Vigen\u00e8re",
+      "brief": "The six-letter keyword was lost. Intelligence confirms that the first six plaintext letters are FOLLOW. Recover the keyword from that aligned excerpt, then decrypt the full Vigen\u00e8re transmission.",
+      "evidence": "CONFIRMED PLAINTEXT PREFIX: FOLLOW\nKEYWORD LENGTH: 6\nOFFSET: 0 / A=0 \u2026 Z=25",
       "hints": [
-        "Look at the beginning of each diagnostic line.",
-        "Use those four initials as a repeating XOR key. Each hex pair is one byte. XOR is its own inverse."
+        "Compare only the first six ciphertext letters with FOLLOW. For each position, K = (C \u2212 P + 26) mod 26.",
+        "Use Recover key in Cipher Lab on those two six-letter excerpts. Then switch to Decode with the resulting keyword and the full ciphertext."
       ],
-      "prompt": "Submit the full decoded packet. Preserve the recovered route key for stage 2.",
-      "code": "1c 00 03 15 0b 04 13 18 07 1c 06 09 0f 01 02 0e 03",
-      "digest": "48bc9d6c856d6e6ae7706ebb85369655eea686dbeb69c95c1e3be621d9012a22"
+      "prompt": "Submit the full decoded transmission, including the route-key announcement.",
+      "code": "HWASSNVPTZMXPIAALVTWJAIBGGXZTRTIASEO",
+      "digest": "5da74b62218c3cc113f19fff84a971ac025e4e26dafdafce11432d85e115a7de"
     },
     {
-      "title": "Phantom schedule",
+      "title": "Parallax window",
       "algorithm": "Vigen\u00e8re",
-      "brief": "The packet revealed a route key. Use it to reverse this repeating-key substitution and recover the blackout schedule.",
-      "evidence": "A=0 \u2026 Z=25 / KEY REPEATS / SPACES REMOVED",
+      "brief": "Use the route keyword recovered above. A longer keyword protects a complete blackout instruction; a partial phrase will not authenticate.",
+      "evidence": "KEY SOURCE: ROUTE KEY IN PREVIOUS MESSAGE\nALPHABET: A \u2026 Z / SPACES REMOVED",
       "hints": [
-        "The final word of the decoded packet is your next keyword.",
-        "Vigen\u00e8re decryption subtracts the repeating key letter from each ciphertext letter, modulo 26."
+        "Locate ROUTE KEY IS in the previous result and take the word that follows it.",
+        "Decode the complete ciphertext with that keyword. Vigen\u00e8re repeats the key from the beginning; it does not reverse it."
       ],
-      "prompt": "Submit the complete blackout instruction.",
-      "code": "QSAPDCGIIETBBEPAZRKCTDBR",
-      "digest": "0738c1684fcf0fc31d14194c89755638c84cf20d0e66294a47733d341ffcd0ec"
+      "prompt": "Submit the full blackout instruction.",
+      "code": "IHVBWLCHDUKBPRIKHWYEYEHBAAJTDLTBALZTPNRLHSVSESEEDRZZZY",
+      "digest": "72e409f0c2c7ef9b65196f2743885fa4677f871e08a09eec3db111755af6e31c"
     }
   ],
   [
     {
-      "title": "A fractured spectrum",
-      "algorithm": "Rail Fence",
-      "brief": "A zigzag transmission crosses 2\u00b2 rails. Start at the top, move downward, and bounce at the edges. The sender concatenated rails from top to bottom.",
-      "evidence": "TRACK HEIGHT: 2\u00b2\nDIRECTION: DOWN FIRST\nREADOUT: TOP TO BOTTOM",
+      "title": "The broken chronology",
+      "algorithm": "Vigen\u00e8re",
+      "brief": "The log is out of order. Put its four fragments in chronological order, concatenate them into one keyword, then decrypt the Vigen\u00e8re transmission.",
+      "evidence": "04:19 \u2014 LA\n04:03 \u2014 OBSI\n04:14 \u2014 NEBU\n04:07 \u2014 DIAN\nKEY RULE: EARLIEST FRAGMENT FIRST",
       "hints": [
-        "2\u00b2 determines the number of rails. Draw the zigzag before filling it.",
-        "Count how many positions belong to each rail, split the ciphertext accordingly, then follow the zigzag."
+        "Sort the timestamps from earliest to latest. Keep each attached fragment intact.",
+        "Concatenate all four fragments without spaces. The resulting 14-letter keyword opens this layer."
       ],
-      "prompt": "Submit the full decoded vault-key announcement.",
-      "code": "VEEAKYPCMUTISTULSR",
-      "digest": "d753cead86150dbf4382ac4fe27c2d1b62024c30781f738db8ea5899fe265c74"
+      "prompt": "Submit the full decoded message containing both the inner and outer keywords.",
+      "code": "WOFMUSELVWBMERCMSJHWUGRVLYJIGOGKWCRAR",
+      "digest": "19cc9e6c884cbbdca3bc68a2903c4b43d072905a24438e346a35bd75098b720e"
     },
     {
-      "title": "The double seal",
-      "algorithm": "Layered cipher",
-      "brief": "Two seals protect the archive. The sender FIRST used Vigen\u00e8re with the vault key recovered above, THEN a columnar transposition. A five-letter object that splits white light names the outer key.",
-      "evidence": "INNER: REPEATING ALPHABETIC KEY\nOUTER: ROW-WISE FILL / ALPHABETICAL COLUMNS\nPAYLOAD: 21 LETTERS / OUTER PADDING: 4 X CHARACTERS",
+      "title": "The double Vigen\u00e8re seal",
+      "algorithm": "Vigen\u00e8re",
+      "brief": "The sender applied Vigen\u00e8re twice: first with the INNER keyword, then with the OUTER keyword. Both are in your previous result. Recover the complete archive instruction in Cipher Lab.",
+      "evidence": "METHOD: VIGEN\u00c8RE AT BOTH LAYERS\nKEY ALIGNMENT: POSITION ZERO IN EACH PASS\nNO PADDING / ALL CHARACTERS BELONG TO THE MESSAGE",
       "hints": [
-        "Undo the last encryption first. The optical object is the columnar keyword.",
-        "The outer keyword is PRISM. Restore its columns, then decrypt Vigen\u00e8re with the key from stage 1."
+        "Decode the entire ciphertext with the OUTER keyword. Keep the intermediate result even if it is not readable.",
+        "Use the intermediate result as input, then decode with the INNER keyword. Submit the complete final message."
       ],
-      "prompt": "Submit the complete archive-opening instruction.",
-      "code": "IUXSXKTMYXLTSMGWBRLXCNEEX",
-      "digest": "9277a81cd348d0ada9ab5fb17ec76b7fc29c68adf5bdc049aa4c51aa30de5bde"
+      "prompt": "Submit the complete archive-opening instruction. An intermediate ciphertext is not the final answer.",
+      "code": "GNZKZEUNMSIBPSQAVWPEUMNDBCITEDWFMGKXXXCJOSJYMSXFHKNGBVGA",
+      "digest": "e19791390994a882e364e461b646c8ee0558fc983ee9d3f968830f5d54c5781b"
     }
   ]
 ];

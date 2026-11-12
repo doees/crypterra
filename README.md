@@ -1,34 +1,33 @@
-# CRYPTERRA
+# CRYPTERRA — Vigenère Campaign
 
-Interactive cryptography adventure built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
+A cryptography adventure built with Next.js, TypeScript, Tailwind CSS, and Framer Motion. All playable encryption and all Cipher Lab tools use **Vigenère**, a classical repeating-key substitution cipher.
 
-The application includes animated globe visuals, playable cipher missions, a Caesar cipher lab, treasure discovery, and browser-local progress.
+## Gameplay
 
-## Development
+Three missions each contain two linked stages:
+
+- **The Genesis Signal:** recover a keyword from a relay log and use a recovered key on a longer transmission.
+- **Ghost in the Grid:** recover a Vigenère keyword from known plaintext, then decrypt an extended blackout instruction.
+- **The Obsidian Vault:** assemble a long keyword from chronological evidence, then decrypt two Vigenère layers.
+
+Cipher Lab offers Encode, Decode, and Recover key. Key recovery is analysis of Vigenère using K = C − P modulo 26. It produces a key segment; a complete keyword requires an aligned excerpt spanning its full period.
+
+The double seal repeats Vigenère twice, with alignment starting at zero for each pass. This is a game challenge using the same cipher; repeated encryption does not imply modern cryptographic security.
+
+Full decoded transmissions are required to verify each stage. Field notes and partial progress persist locally. This campaign uses `crypterra-progress-v3` and separate notes so earlier campaigns cannot unlock new puzzles automatically. Answer checksums are internal game validation, not an additional playable encryption method.
+
+## Development and checks
 
 ```sh
 npm ci
 npm run dev
-```
-
-## GitHub Pages
-
-Deployment uses static export. The production base path is `/crypterra`.
-
-In repository **Settings → Pages**, choose **GitHub Actions** as the source.
-The `Deploy CRYPTERRA to GitHub Pages` workflow builds and publishes each push to `main`.
-For manual deployment, select the workflow in the Actions tab and click **Run workflow**.
-
-To check the project path locally:
-
-```sh
+npm test
+npm run typecheck
 NEXT_PUBLIC_BASE_PATH=/crypterra npm run build
 ```
 
-## Campaign 02
+Tests cover Vigenère vectors, key recovery, all six mission chains, answer validation, and saved progress. GitHub Actions runs tests and builds before deploying.
 
-Three missions now contain two linked layers each: Vigenère and columnar transposition; repeating-key XOR and Vigenère; Rail Fence followed by a double cipher seal. Players must recover keys from evidence and submit complete decoded transmissions.
+## GitHub Pages
 
-Five algorithms are available in Cipher Lab. Field notes and partial mission progress persist in the browser. The new campaign uses a separate progress key (`crypterra-progress-v2`) so completed training missions do not skip the new puzzles.
-
-Run `npm test` for known cipher vectors, invalid input handling, all six puzzle chains, answer verification, and progress validation. GitHub Actions runs these checks before publication.
+In Settings → Pages, set Source to GitHub Actions. Push to main to deploy, or run the Deploy CRYPTERRA workflow manually. Static output is generated in `out/`; the deployment workflow configures the repository base path.

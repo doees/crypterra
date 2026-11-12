@@ -6,7 +6,7 @@
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "typecheck": "tsc --noEmit",
-    "test": "tsc lib/ciphers.ts lib/missions.ts --outDir .test-build --target ES2022 --module commonjs --skipLibCheck && node --test tests/ciphers.test.cjs"
+    "test": "tsc lib/vigenere.ts lib/missions.ts --outDir .test-build --target ES2022 --module commonjs --skipLibCheck && node --test tests/vigenere.test.cjs"
   },
   "dependencies": {
     "next": "^16.0.0",
