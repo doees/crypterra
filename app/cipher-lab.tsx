@@ -1,0 +1,15 @@
+'use client';
+import { useState } from 'react';
+import { Check, Copy, FlaskConical, Terminal } from 'lucide-react';
+import { transform, type Cipher } from '../lib/ciphers';
+export default function CipherLab() {
+ const [cipher,setCipher]=useState<Cipher>('Vigenère');
+ const [input,setInput]=useState('LXFOPVEFRNHR');
+ const [key,setKey]=useState('LEMON');
+ const [decode,setDecode]=useState(true);
+ const [copied,setCopied]=useState(false);
+ let output='',error='';
+ try { output=transform(cipher,input,key,decode); } catch(e) {error=(e as Error).message;}
+ const change=(next:Cipher)=>{setCipher(next);setKey(next==='Caesar'?'3':next==='Rail Fence'?'4':'');setInput('');};
+ return <section className="tool-section"><div className="eyebrow">// EXPERIMENT. DECODE. DISCOVER.</div><h1 className="page-title">Cipher <em>Lab.</em></h1><p className="subtext">Five tools. Your keys. Reverse the layers one at a time. No automatic puzzle solutions.</p><div className="lab-grid"><div className="panel"><h3><FlaskConical size={20}/> Cryptanalysis workbench</h3><label htmlFor="algorithm">ALGORITHM</label><select id="algorithm" value={cipher} onChange={e=>change(e.target.value as Cipher)}>{(['Caesar','Vigenère','XOR hex','Columnar','Rail Fence'] as Cipher[]).map(c=><option key={c}>{c}</option>)}</select><div className="tabs">{['Decode','Encode'].map((m,i)=><button className={decode===(i===0)?'active':''} key={m} onClick={()=>setDecode(i===0)}>{m}</button>)}</div><label htmlFor="cipher-input">INPUT TRANSMISSION</label><textarea id="cipher-input" value={input} onChange={e=>setInput(e.target.value)} rows={5}/><label htmlFor="cipher-key">{cipher==='Caesar'?'SHIFT (0–25)':cipher==='Rail Fence'?'RAILS (2–10)':'KEYWORD'}</label><input id="cipher-key" value={key} onChange={e=>setKey(e.target.value)} placeholder={cipher==='XOR hex'?'ASCII key · case sensitive':'Your recovered key…'}/></div><div className="panel output-panel"><div className="panel-title"><h3><Terminal size={20}/> Live output</h3><span className="status-dot"/></div><div aria-live="polite" className="decoded">{error||output||'Awaiting transmission…'}</div><button className="secondary" disabled={!!error||!output} onClick={async()=>{try {await navigator.clipboard.writeText(output);setCopied(true);} catch {setCopied(false);} }}>{copied?<Check size={16}/>:<Copy size={16}/>} {copied?'Copied':'Copy output'}</button><p>{cipher==='Columnar'?'Fill rows left to right; read columns in alphabetical keyword order. Encoding pads with X. Decoding retains padding: remove only the padding described in your mission.':cipher==='XOR hex'?'Each hex pair is one byte. Apply the repeating ASCII key with XOR. Keys are case sensitive.':cipher==='Rail Fence'?'Write a zigzag from the top rail downward. Read rails from top to bottom; decoding reconstructs that path.':cipher==='Vigenère'?'Letters use A=0 to Z=25. Add the repeating keyword to encode; subtract to decode. Spaces and punctuation are removed.':'Shift each letter by a fixed number, modulo 26.'}</p></div></div></section>;
+}

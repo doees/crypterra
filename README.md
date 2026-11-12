@@ -24,3 +24,11 @@ To check the project path locally:
 ```sh
 NEXT_PUBLIC_BASE_PATH=/crypterra npm run build
 ```
+
+## Campaign 02
+
+Three missions now contain two linked layers each: Vigenère and columnar transposition; repeating-key XOR and Vigenère; Rail Fence followed by a double cipher seal. Players must recover keys from evidence and submit complete decoded transmissions.
+
+Five algorithms are available in Cipher Lab. Field notes and partial mission progress persist in the browser. The new campaign uses a separate progress key (`crypterra-progress-v2`) so completed training missions do not skip the new puzzles.
+
+Run `npm test` for known cipher vectors, invalid input handling, all six puzzle chains, answer verification, and progress validation. GitHub Actions runs these checks before publication.
